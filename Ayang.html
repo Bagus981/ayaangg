@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Pagi, Ristina!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('cimung.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        .layer2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('ppp.png'); /* Ganti dengan nama file layer kedua */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7; /* Mengatur transparansi layer kedua */
+            animation: fadeIn 5s infinite alternate; /* Animasi */
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative; /* Agar container tetap di atas */
+            z-index: 1; /* Mengatur z-index agar di atas layer */
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #e91e63;
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background"></div>
+<div class="layer2"></div> <!-- Layer kedua dengan animasi -->
+
+<div class="container" id="morning-container">
+    <h1>Selamat Pagi, Ayaangg</h1>
+    <button class="btn" onclick="goToLogin()">Lanjut</button>
+</div>
+
+<div class="container hidden" id="login-container">
+    <h2>Masukkan Nama Anda</h2>
+    <input type="text" id="name" placeholder="Nama">
+    <button class="btn" onclick="nextStep()">Next</button>
+    <p id="error-message" style="color:red;"></p>
+</div>
+
+<div class="container hidden" id="dob-container">
+    <h2>Masukkan Tanggal Lahir Anda</h2>
+    <input type="text" id="dob" placeholder="DDMMYYYY" maxlength="8">
+    <button class="btn" onclick="login()">Login</button>
+    <p id="dob-error-message" style="color:red;"></p>
+</div>
+
+<div class="container hidden" id="message-container">
+    <p class="message" id="message"></p>
+</div>
+
+<script>
+    function goToLogin() {
+        document.getElementById('morning-container').classList.add('hidden');
+        document.getElementById('login-container').classList.remove('hidden');
+    }
+
+    function nextStep() {
+        const name = document.getElementById('name').value;
+        if (name.trim() === "Ristina Hariyani") {
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('dob-container').classList.remove('hidden');
+        } else {
+            document.getElementById('error-message').innerText = 'Nama tidak valid!';
+        }
+    }
+
+    function login() {
+        const dob = document.getElementById('dob').value;
+        if (dob === "01042003") {
+            document.getElementById('dob-container').classList.add('hidden');
+            document.getElementById('message-container').classList.remove('hidden');
+            document.getElementById('message').innerText = "Selamat Pagi ayaangg, Gimana semalam nyenyak gak boboknya, maaf ya gabisa main kesitu tadi mayam, ayaangg semangat ya kerjanya, jan yupa sarapannya, kalo capek jan dipaksa ya istirahat yang cukup yaangg, LOVE YOU ayaangg!";
+        } else {
+            document.getElementById('dob-error-message').innerText = 'Tanggal lahir tidak valid!';
+        }
+    }
+</script>
+
+</body>
+</html>
